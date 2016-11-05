@@ -14,6 +14,7 @@ var domains = {
   "raw.githubusercontent.com": 1,
   "iobit.com": 1,
   "telegram.org": 1,
+  "tdesktop.com":1,
   "abc.xyz": 1,
   "s3.amazonaws.com": 1,
   "d.chenqiwei.com": 1,
