@@ -1,0 +1,191 @@
+<?php
+
+//1、写一段代码，实现PHP内部的通知机制，如当一个类的属性发生变化时，另外一个类就可以收到通知(如提供两种及以上思路，可加分)
+
+//1)可利用观察者模式
+
+/*interface Subject{
+	public function attach( Observer $observer ) ; // 注册观察者
+	public function detach( Observer $observer ) ; // 删除观察者
+
+	public function post() ; // 举例的事件，发自拍通知
+
+	public function notify() ; // 通知广播
+}
+
+interface Observer{
+	public function update() ; // 通知后的响应
+}
+
+class ConcreteSubject implements Subject{
+	private $__observers ; // 被观察者中的观察者数组
+	private $_message ;
+	private $_me ;
+
+	public function __construct( $me ,  $message ){
+		$this->__observers = array() ;
+		$this->_me = $me ;
+		$this->_message = $message ;
+	}
+
+	public function attach( Observer $observer ){
+		$this->__observers[] = $observer ; 
+	}
+
+	public function detach( Observer $observer ){
+		$i = array_search( $observer , $this->__observers , true ) ;
+		if( $i !== false ){
+			unset( $this->__observers[$i] ) ;
+		}
+		return true ;
+	}
+
+	public function post(){
+		echo "{$this->_me} just post a selfie with message " . $this->_message . '<br/>' ;
+		$this->notify() ;
+	}
+
+	public function notify(){ 
+		if( !is_array( $this->__observers ) ){
+			return false ;
+		}
+
+		foreach( $this->__observers as $observer ){
+			$observer->update() ;
+		}
+	}
+
+}
+
+
+
+class ConcreteObserver implements Observer{
+	private $_name ;
+
+	public function __construct( $name ){
+		$this->_name = $name ;
+	}
+
+	public function update(){ // 响应函数
+		echo 'Observer ' . $this->_name . ' just like the moments<br/>' ;
+	}
+}
+
+//被观察者
+$jenny = new ConcreteSubject("Jenny","Gone with the wind") ;
+//观察者
+$john   = new ConcreteObserver('John') ;
+$steven = new ConcreteObserver('Steven') ;
+
+$jenny->attach( $john ) ;
+$jenny->attach( $steven ) ;
+//$jenny->detach( $john ) ;
+$jenny->post() ;
+
+
+
+
+
+*/
+
+
+//2.以下代码会输出结果吗？如果不能请说明原因，并列举出三种可以使其输出结果的方式
+
+/*私有变量不能被对象在类外部直接调用。
+调用它的几种方法
+
+1.构造方法 2.手动建可访问的方法，方法内调用私有变量 3.魔术方法__set( $propertyName , $value ),__get($propertyName)*/
+
+
+//3、看代码回答问题
+
+//答案我写在注释
+/*$a = 1;
+
+function func( &amp;$a ){
+
+echo $a;
+
+$a = 100;
+
+}
+
+func($a); // 1
+
+echo $a; // 100
+
+class A{
+
+public $a = 10;
+
+}
+
+$obj = new A();
+
+func($obj->a);// 10
+
+echo $obj->a;// 100
+*/
+
+//4、如何解决或降低缓存服务的单点故障导致数据库的流量井喷
+ //资源文件请求优化 , CDN , 缓存 , 分布式机器/dns轮循(我觉得这个关键，避免单台服务器压力过大) , 负载均衡..
+
+
+/*5、设计一个数据库表，实现评论楼盖楼效果，并写出sql语句
+
+a、写出建表语句
+
+b、查询一个评论的所有子评论
+
+c、写出每次新增和删除的sql语句
+
+d、写出计算层级深度的sql语句*/
+
+/*create table comments(
+id int(11) unsigned not null primary key auto_increment ,
+rootid int(11) unsigned default 0 ,
+path varchar(255) not null , 
+msg varchar(255) not null default '' ,
+time datetime not null,
+uid int(11) unsigned not null default 0 , 
+uname char(200) not null default '' ,
+...
+...
+index(path)
+);*/
+//b、查询一个评论的所有子评论
+/*$id = 1 ; // 查询的某条评论的id
+$sql = "select id,rootid,path,msg,time from comments where path like '/{$id}/%' ";
+
+//c、写出每次新增和删除的sql语句
+//新增
+//假设前台 每一条评论 应该输出这些数据 可以储存在每一条评论html元素(比如li)的data-rootid,data-reid里，以供评论时ajax取值请求
+$rootid = 2 ;
+$reid = 40 ; // 欲回复的评论的id
+$reid_path = '/2/15/40/' ;
+$time = time() ;
+$sql = "insert into comments(rootid,path,msg,time) values('".$rootid".','".$reid_path."','".$msg."','".$time."')";
+//删除评论
+$id = 43 ; // 欲删除的评论id及它的子评论 
+$sql = "delete from comments where id = $id ";
+$sql = "delete from comments where path like '/43/%'" ;  
+*/
+//d、写出计算层级深度的sql语句*/
+$id = 99 ; // 欲查找的评论id
+$sql = "select path from comments where id = {$id}";
+$path = '/2/32/57/66/79/' ;
+//取出后 用php来计算
+$level = substr_count( $path , '/' ) ;
+
+
+// 6.
+
+
+
+
+
+
+
+
+
+
