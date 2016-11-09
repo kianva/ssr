@@ -241,7 +241,7 @@ $sql = "select uid from {$fans_table_name} where follow_uid = {$uid} and uid in 
 7.涉及海量数据的写入与存储，应该在功能上尽可能地细化功能，分别处理，可以设置分布式的一批HTTP服务器来专门作日志收集工作，另一批服务器专门作存储，收集服务器按一定周期向存储服务器写入日志，
 要考虑稳定性，扩展能力，系统监控等等。因为海量数据带来大来读写，大量读写还带来了传输上的问题。这个问题我不是特别有经验，实施起来对运维和架构能力要求比较高。
 
-
+参考http://tech.meituan.com/mt-log-system-arch.html
 
 
 
