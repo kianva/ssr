@@ -4,7 +4,7 @@
 
 //1)可利用观察者模式
 
-/*interface Subject{
+interface Subject{
 	public function attach( Observer $observer ) ; // 注册观察者
 	public function detach( Observer $observer ) ; // 删除观察者
 
@@ -86,21 +86,21 @@ $jenny->post() ;
 
 
 
-*/
+
 
 
 //2.以下代码会输出结果吗？如果不能请说明原因，并列举出三种可以使其输出结果的方式
 
-/*私有变量不能被对象在类外部直接调用。
+私有变量不能被对象在类外部直接调用。
 调用它的几种方法
 
-1.构造方法 2.手动建可访问的方法，方法内调用私有变量 3.魔术方法__set( $propertyName , $value ),__get($propertyName)*/
+1.构造方法 2.手动建可访问的方法，方法内调用私有变量 3.魔术方法__set( $propertyName , $value ),__get($propertyName)
 
 
-//3、看代码回答问题
+3、看代码回答问题
 
 //答案我写在注释
-/*$a = 1;
+$a = 1;
 
 function func( &amp;$a ){
 
@@ -125,7 +125,7 @@ $obj = new A();
 func($obj->a);// 10
 
 echo $obj->a;// 100
-*/
+
 
 //4、如何解决或降低缓存服务的单点故障导致数据库的流量井喷
  //资源文件请求优化 , CDN , 缓存 , 分布式机器/dns轮循(我觉得这个关键，避免单台服务器压力过大) , 负载均衡..
@@ -141,7 +141,7 @@ c、写出每次新增和删除的sql语句
 
 d、写出计算层级深度的sql语句*/
 
-/*create table comments(
+create table comments(
 id int(11) unsigned not null primary key auto_increment ,
 rootid int(11) unsigned default 0 ,
 path varchar(255) not null , 
@@ -152,9 +152,9 @@ uname char(200) not null default '' ,
 ...
 ...
 index(path)
-);*/
+);
 //b、查询一个评论的所有子评论
-/*$id = 1 ; // 查询的某条评论的id
+$id = 1 ; // 查询的某条评论的id
 $sql = "select id,rootid,path,msg,time from comments where path like '/{$id}/%' ";
 
 //c、写出每次新增和删除的sql语句
@@ -169,7 +169,7 @@ $sql = "insert into comments(rootid,path,msg,time) values('".$rootid".','".$reid
 $id = 43 ; // 欲删除的评论id及它的子评论 
 $sql = "delete from comments where id = $id ";
 $sql = "delete from comments where path like '/43/%'" ;  
-*/
+
 //d、写出计算层级深度的sql语句*/
 $id = 99 ; // 欲查找的评论id
 $sql = "select path from comments where id = {$id}";
@@ -238,7 +238,8 @@ $sql = "select uid from {$fans_table_name} where follow_uid = {$uid} and uid in 
 
 
 
-
+7.涉及海量数据的写入与存储，应该在功能上尽可能地细化功能，分别处理，可以设置分布式的一批HTTP服务器来专门作日志收集工作，另一批服务器专门作存储，收集服务器按一定周期向存储服务器写入日志，
+要考虑稳定性，扩展能力，系统监控等等。因为海量数据带来大来读写，大量读写还带来了传输上的问题。这个问题我不是特别有经验，实施起来对运维和架构能力要求比较高。
 
 
 
