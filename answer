@@ -2,7 +2,7 @@
 
 //1、写一段代码，实现PHP内部的通知机制，如当一个类的属性发生变化时，另外一个类就可以收到通知(如提供两种及以上思路，可加分)
 
-//1)可利用观察者模式
+//1)可利用观察者模式 2)有限状态机
 
 interface Subject{
 	public function attach( Observer $observer ) ; // 注册观察者
