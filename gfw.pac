@@ -2641,7 +2641,8 @@ var domains = {
   "pac.ink":1,
   "localbitcoins.com":1,
   "vnet.link":1,
-  "multibit.org":1
+  "multibit.org":1,
+  "freenom.com":1
 };
 
 var direct = 'DIRECT;';
