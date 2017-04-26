@@ -2637,7 +2637,10 @@ var domains = {
   "ift.tt":1,
   "adblockplus.org":1,
   "symfony.cn":1,
-  "git-awards.com":1
+  "git-awards.com":1,
+  "pac.ink":1,
+  "localbitcoins.com":1,
+  "vnet.link":1
 };
 
 var direct = 'DIRECT;';
