@@ -2642,7 +2642,8 @@ var domains = {
   "localbitcoins.com":1,
   "vnet.link":1,
   "multibit.org":1,
-  "freenom.com":1
+  "freenom.com":1,
+  "jwplatform.com":1
 };
 
 var direct = 'DIRECT;';
